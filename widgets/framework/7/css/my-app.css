@@ -1,0 +1,389 @@
+@font-face {
+  font-family: 'Sparks Bar';
+  src: url('../../../fonts/sparks/eot/Sparks-Bar-Narrow.eot');
+  src: url('../../../fonts/sparks/eot/Sparks-Bar-Narrow.eot') format('embedded-opentype'),
+  url('../../../fonts/sparks/woff2/Sparks-Bar-Narrow.woff2') format('woff2'),
+  url('../../../fonts/sparks/woff/Sparks-Bar-Narrow.woff') format('woff'),
+  url('../../../fonts/sparks/ttf/Sparks-Bar-Narrow.ttf') format('truetype'),
+  url('../../../fonts/sparks/svg/Sparks-Bar-Narrow.svg') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+div[class*="dashboard"] {
+    background-color: #fff;
+    text-align: right;
+    color: #666;
+    padding: 10px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    font-size: 8pt;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: 3% 100%;
+}
+
+.dash-title {
+  font-size:12pt;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+}
+
+.dash-number {
+  font-size:24pt;
+  font-weight: 300;
+  letter-spacing: -1px;
+}
+
+.dash-bar {
+  font-family: 'Sparks Bar';
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+.statusbar-overlay {
+  background: #22272b;
+}
+
+/* Custom colors for charts and series */
+.color-01{
+  color: #1169d8;
+}
+.background-01{
+  background: linear-gradient(#54b6ff,#1169d8);
+}
+.gradient-01{
+  background: linear-gradient(#54b6ff,#1169d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.progressbar.color-01 span,
+.progressbar.theme-01 span,
+.theme-01 .progressbar span,
+.progressbar.bg-01 span{
+  background-color: #1169d8;
+}
+.color-02{
+  color: #009c21;
+}
+.background-02{
+  background: linear-gradient(#4edd19,#009c21);
+}
+.gradient-02{
+  background: linear-gradient(#4edd19,#009c21);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-02 span,
+.progressbar.theme-02 span,
+.theme-02 .progressbar span,
+.progressbar.bg-02 span {
+  background-color: #009c21;
+}
+.color-03{
+  color: #f9cb1d;
+}
+.background-03{
+  background: linear-gradient(#fed75c,#f9cb1d);
+}
+.gradient-03{
+  background: linear-gradient(#fed75c,#f9cb1d);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-03 span,
+.progressbar.theme-03 span,
+.theme-03 .progressbar span,
+.progressbar.bg-03 span {
+  background-color: #f9cb1d;
+}
+.color-04{
+  color: #ea1212;
+}
+.background-04{
+  background: linear-gradient(#fd630a,#ea1212);
+}
+.gradient-04{
+  background: linear-gradient(#fd630a,#ea1212);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-04 span,
+.progressbar.theme-04 span,
+.theme-04 .progressbar span,
+.progressbar.bg-04 span {
+  background-color: #ea1212;
+}
+.color-05{
+  color: #500a85;
+}
+.background-05{
+  background: linear-gradient(#ab2e96,#500a85);
+}
+.gradient-05{
+  background: linear-gradient(#ab2e96,#500a85);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-05 span,
+.progressbar.theme-05 span,
+.theme-05 .progressbar span,
+.progressbar.bg-05 span {
+  background-color: #500a85;
+}
+.color-06{
+  color: #a63d00;
+}
+.background-06{
+  background: linear-gradient(#ed8f1c,#a63d00);
+}
+.gradient-06{
+  background: linear-gradient(#ed8f1c,#a63d00);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-06 span,
+.progressbar.theme-06 span,
+.theme-06 .progressbar span,
+.progressbar.bg-06 span {
+  background-color: #a63d00;
+}
+.color-07{
+  color: #008391;
+}
+.background-07{
+  background: linear-gradient(#0ace80,#008391);
+}
+.gradient-07{
+  background: linear-gradient(#0ace80,#008391);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-07 span,
+.progressbar.theme-07 span,
+.theme-07 .progressbar span,
+.progressbar.bg-07 span {
+  background-color: #008391;
+}
+.color-08{
+  color: #b6b6b6;
+}
+.background-08{
+  background: linear-gradient(#d2d2d2,#b6b6b6);
+}
+.gradient-08{
+  background: linear-gradient(#d2d2d2,#b6b6b6);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-08 span,
+.progressbar.theme-08 span,
+.theme-08 .progressbar span,
+.progressbar.bg-08 span {
+  background-color: #b6b6b6;
+}
+.color-09{
+  color: #242424;
+}
+.background-09{
+  background: linear-gradient(#747474,#242424);
+}
+.gradient-09{
+  background: linear-gradient(#747474,#242424);
+  -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.progressbar.color-09 span,
+.progressbar.theme-09 span,
+.theme-09 .progressbar span,
+.progressbar.bg-09 span {
+  background-color: #242424;
+}
+.color-10{
+  color: #303030;
+}
+.background-10{
+  background: linear-gradient(#7d7d7d,#303030);
+}
+.gradient-10{
+  background: linear-gradient(#7d7d7d,#303030);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.progressbar.color-10 span,
+.progressbar.theme-10 span,
+.theme-10 .progressbar span,
+.progressbar.bg-10 span {
+  background-color: #303030;
+}
+
+/* Nestor iOS Color Framework*/
+.color-nestor {
+  color: #3464bc;
+}
+.list-block .item-link.list-button.color-nestor,
+.tabbar a.active.color-nestor,
+a.color-nestor {
+  color: #3464bc;
+}
+.label-switch input[type="checkbox"]:checked + .checkbox.color-nestor,
+.label-switch.color-nestor input[type="checkbox"]:checked + .checkbox {
+  background-color: #3464bc;
+}
+.color-nestor.button:not(.button-fill),
+.color-nestor.buttons-row .button,
+.theme-nestor .button:not(.button-fill) {
+  border-color: #3464bc;
+}
+html:not(.watch-active-state) .color-nestor.button:not(.button-fill):active,
+html:not(.watch-active-state) .color-nestor.buttons-row .button:active,
+html:not(.watch-active-state) .theme-nestor .button:not(.button-fill):active,
+.color-nestor.button:not(.button-fill).active-state,
+.color-nestor.buttons-row .button.active-state,
+.theme-nestor .button:not(.button-fill).active-state {
+  background-color: rgba(142, 142, 147, 0.15);
+}
+.color-nestor.button:not(.button-fill).active,
+.color-nestor.buttons-row .button.active,
+.theme-nestor .button:not(.button-fill).active {
+  background-color: #3464bc;
+  color: #fff;
+}
+.theme-nestor .button.button-fill,
+.button.button-fill.color-nestor {
+  background: #3464bc;
+  color: #fff;
+}
+.progressbar.color-nestor span,
+.progressbar.theme-nestor span,
+.theme-nestor .progressbar span,
+.progressbar.bg-nestor span {
+  background-color: #3464bc;
+}
+.progressbar-infinite.color-nestor:before,
+.progressbar-infinite.theme-nestor:before,
+.theme-nestor .progressbar-infinite:before,
+.progressbar-infinite.bg-nestor:before {
+  background-color: #3464bc;
+}
+.color-nestor i.icon,
+.theme-nestor i.icon,
+i.icon.color-nestor,
+i.icon.theme-nestor {
+  color: #3464bc;
+}
+i.icon-next.color-nestor,
+i.icon-next.theme-nestor,
+.theme-nestor i.icon-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2015%2015'%3E%3Cg%3E%3Cpath%20fill%3D'%233464bc'%20d%3D'M1%2C1.6l11.8%2C5.8L1%2C13.4V1.6%20M0%2C0v15l15-7.6L0%2C0L0%2C0z'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+i.icon-prev.color-nestor,
+i.icon-prev.theme-nestor,
+.theme-nestor i.icon-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2015%2015'%3E%3Cg%3E%3Cpath%20fill%3D'%233464bc'%20d%3D'M14%2C1.6v11.8L2.2%2C7.6L14%2C1.6%20M15%2C0L0%2C7.6L15%2C15V0L15%2C0z'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+i.icon-back.color-nestor,
+i.icon-back.theme-nestor,
+.theme-nestor i.icon-back {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2012%2020'%3E%3Cpath%20d%3D'M10%2C0l2%2C2l-8%2C8l8%2C8l-2%2C2L0%2C10L10%2C0z'%20fill%3D'%233464bc'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-forward.color-nestor,
+i.icon-forward.theme-nestor,
+.theme-nestor i.icon-forward {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2012%2020'%3E%3Cpath%20d%3D'M2%2C20l-2-2l8-8L0%2C2l2-2l10%2C10L2%2C20z'%20fill%3D'%233464bc'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-bars.color-nestor,
+i.icon-bars.theme-nestor,
+.theme-nestor i.icon-bars {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2021%2014'%3E%3Cpath%20fill%3D'%233464bc'%20d%3D'M0%2C0h2v2H0V0z%20M4%2C0h17v1H4V0z%20M0%2C6h2v2H0V6z%20M4%2C6h17v1H4V6z%20M0%2C12h2v2H0V12z%20M4%2C12h17v1H4V12z'%2F%3E%3C%2Fsvg%3E");
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  i.icon-bars.color-nestor,
+  i.icon-bars.theme-nestor,
+  .theme-nestor i.icon-bars {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2042%2026'%3E%3Cpath%20fill%3D'%233464bc'%20d%3D'M0%2C0h4v4H0V0z%20M8%2C1h34v2H8V1z%20M0%2C11h4v4H0V11z%20M8%2C12h34v2H8V12z%20M0%2C22h4v4H0V22z%20M8%2C23h34v2H8V23z'%2F%3E%3C%2Fsvg%3E");
+  }
+}
+.theme-nestor a,
+.theme-nestor .item-link.list-button {
+  color: #3464bc;
+}
+.theme-nestor .tabbar a,
+.tabbar.theme-nestor a,
+.theme-nestor .tabbar a i,
+.tabbar.theme-nestor a i {
+  color: inherit;
+}
+.theme-nestor .tabbar a.active,
+.tabbar.theme-nestor a.active,
+.theme-nestor .tabbar a.active i,
+.tabbar.theme-nestor a.active i {
+  color: #3464bc;
+}
+.theme-nestor .range-slider input[type="range"]::-webkit-slider-thumb:before,
+.range-slider.theme-nestor input[type="range"]::-webkit-slider-thumb:before {
+  background-color: #3464bc;
+}
+.theme-nestor .range-slider input[type="range"]::-ms-fill-lower,
+.range-slider.theme-nestor input[type="range"]::-ms-fill-lower {
+  background-color: #3464bc;
+}
+.theme-nestor label.label-checkbox input[type="checkbox"]:checked + .item-media i.icon-form-checkbox,
+.theme-nestor label.label-checkbox input[type="radio"]:checked + .item-media i.icon-form-checkbox {
+  background-color: #3464bc;
+}
+.theme-nestor label.label-radio input[type="checkbox"]:checked ~ .item-inner,
+.theme-nestor label.label-radio input[type="radio"]:checked ~ .item-inner {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2013%2010'%3E%3Cpolygon%20fill%3D'%233464bc'%20points%3D'11.6%2C0%204.4%2C7.2%201.4%2C4.2%200%2C5.6%204.4%2C10%204.4%2C10%204.4%2C10%2013%2C1.4%20'%2F%3E%3C%2Fsvg%3E");
+}
+.theme-nestor .picker-calendar-day.picker-calendar-day-selected span {
+  background-color: #3464bc !important;
+}
+.swiper-pagination.color-nestor .swiper-pagination-bullet-active,
+.theme-nestor .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #3464bc;
+}
+.swiper-pagination.color-nestor .swiper-pagination-progressbar,
+.theme-nestor .swiper-pagination .swiper-pagination-progressbar {
+  background-color: #3464bc;
+}
+.swiper-pagination.swiper-pagination-progress.bg-nestor {
+  background-color: rgba(142, 142, 147, 0.25);
+}
+.swiper-button-next.color-nestor,
+.swiper-container-rtl .swiper-button-prev.color-nestor,
+.theme-nestor .swiper-button-next,
+.theme-nestor .swiper-container-rtl .swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%233464bc'%2F%3E%3C%2Fsvg%3E");
+}
+.swiper-button-prev.color-nestor,
+.swiper-container-rtl .swiper-button-next.color-nestor,
+.theme-nestor .swiper-button-prev,
+.theme-nestor .swiper-container-rtl .swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%233464bc'%2F%3E%3C%2Fsvg%3E");
+}
+.bg-nestor,
+.button.button-fill.bg-nestor,
+a.bg-nestor,
+.list-block .swipeout-actions-left a.bg-nestor,
+.list-block .swipeout-actions-right a.bg-nestor {
+  background-color: #3464bc;
+}
+
+.border-nestor {
+  border-color: #3464bc;
+}
+.list-block .border-nestor.item-inner:after,
+.list-block ul.border-nestor:after,
+.border-nestor:after,
+.list-block .border-nestor.item-inner:before,
+.list-block ul.border-nestor:before,
+.border-nestor:before {
+  background-color: #3464bc;
+}
+.badge.color-nestor,
+.badge.theme-nestor {
+  background-color: #3464bc;
+  color: #fff;
+}

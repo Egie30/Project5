@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" media="screen" href="../css/screen.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../framework/combobox/chosen.css">
+<script type="text/javascript">
+function checkbox() {
+	var checked = false;
+	if (document.querySelector('#TAX_F:checked')) {
+		checked = true;
+		document.getElementById('ACTG_TYP').value = '2';
+	}else{
+		checked = false;
+		document.getElementById('ACTG_TYP').value = '';
+	}
+}
+</script>
+</head>
+<body>
+<h4>Select a Date:</h4>
+
+<input name='TAX_F' id='TAX_F' type='checkbox' class='regular-checkbox'  onclick="checkbox()"/>&nbsp;<label for="TAX_F"></label>
+
+<br><br>
+
+<select name="ACTG_TYP" id="ACTG_TYP" class="chosen-select" style="width:88px">
+	<option value="">Pilih</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+</select></div><div class="labelbox">
+<!--
+<select id="my_select">
+    <option value="">Slect</option>
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+</select>
+
+<div id="reset">reset</div>
+-->
+<script src="../framework/database/jquery.min.js" type="text/javascript"></script>
+<script src="../framework/combobox/chosen.jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var config = {
+		'.chosen-select'           : {},
+		'.chosen-select-deselect'  : {allow_single_deselect:true},
+		'.chosen-select-no-single' : {disable_search_threshold:10},
+		'.chosen-select-no-results': {no_results_text:'Data tidak ketemu'},
+		'.chosen-select-width'     : {width:"95%"}
+	}
+	for (var selector in config) {
+		$(selector).chosen(config[selector]);
+	}
+</script>
+<!--
+<script type="text/javascript">
+jQuery("#TAX_F").click(function(){
+	var Rek = jQuery("#ACTG_TYP").val();
+	if((Tax=="I")||(Tax=="A")){
+		console.log('atas');
+		jQuery("#ACTG_TYP").html('<option value="1">1</option><option value="2">2</option><option value="3">3</option>');
+		jQuery('.chosen-select').trigger("chosen:updated");
+	} else if((Tax=="E")&&(Rek=="1")){
+		console.log('bawah');
+		jQuery("#ACTG_TYP").html('<option value="2">2</option><option value="3">3</option><option value="1">1</option>');
+		jQuery('.chosen-select').trigger("chosen:updated");
+	}
+});
+</script>
+-->
+
+<script type="text/javascript">
+jQuery("#TAX_F").on("click", function () {
+	if (jQuery(this).is(':checked')) {
+		jQuery("#ACTG_TYP").html('<option value="1">1</option><option value="2">2</option><option value="3">3</option>');
+		jQuery('.chosen-select').trigger("chosen:updated");
+	}else{
+		jQuery("#ACTG_TYP").html('<option value="">Pilih</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>');
+		jQuery('.chosen-select').trigger("chosen:updated");
+	}
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<?php
+	include 'framework/database/connect.php';echo "<pre>";
+
+	//Mengambil configurasi tanggal payroll bedasarkan tanggal kemarin
+	$query = "SELECT  PAY_CONFIG_NBR,
+					  PAY_BEG_DTE,
+					  PAY_END_DTE 
+				FROM  PAY.PAY_CONFIG_DTE 
+				WHERE (CURRENT_DATE - INTERVAL 1 DAY) >= PAY_BEG_DTE 
+					  AND (CURRENT_DATE - INTERVAL 1 DAY) <= PAY_END_DTE
+				#WHERE PAY_CONFIG_NBR = 9
+				";
+	$result = mysql_query($query);
+	$row    = mysql_fetch_array($result);
+
+	$PayConfigNbr = $row['PAY_CONFIG_NBR'];
+	$PayBegDte    = $row['PAY_BEG_DTE'];
+	$PayEndDte    = $row['PAY_END_DTE'];
+
+	//Untuk menghapus data CDW yang memiliki PAY_CONFIG_NBR hari kemarin
+	$query  = "DELETE FROM CDW.PAY_CMSN_DET WHERE PAY_CONFIG_NBR = ".$PayConfigNbr;echo $query;
+	$result = mysql_query($query);
+
+
+
+	$query = "INSERT INTO CDW.PAY_CMSN_DET(
+				ORD_DET_NBR,
+				ORD_NBR,
+				ORD_DTE,
+				CMP_TS,
+				CAT_NBR,
+				CAT_SUB_NBR,
+				PRSN_NBR,
+				DISC_PCT,
+				ORD_Q,
+				ORD_Q_DEP,
+				INV_PRC,
+				PRC,
+				TOT_SUB,
+				MARGIN,
+				PAY_CONFIG_NBR
+				)
+				SELECT 
+					DET.ORD_DET_NBR,
+					DET.ORD_NBR,
+					HED.ORD_DTE,
+					HED.CMP_TS,
+					INV.CAT_NBR,
+					INV.CAT_SUB_NBR,
+					COM.ACCT_EXEC_NBR,
+					DET.DISC_PCT,
+					DET.ORD_Q,
+					(CASE
+						WHEN
+							DATE(PAY.MAX_CRT_TS) >= DATE(HED.ORD_DTE)
+							AND DATE(PAY.MAX_CRT_TS) <= LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL COALESCE(PAY_TERM, 32) DAY))
+						THEN DET.ORD_Q * (100 / 100)
+						WHEN
+							DATE(PAY.MAX_CRT_TS) > LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL COALESCE(PAY_TERM, 32) DAY))
+							AND DATE(PAY.MAX_CRT_TS) <= LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 2 MONTH))
+						THEN DET.ORD_Q * (80 / 100)
+						WHEN
+							DATE(PAY.MAX_CRT_TS) > LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 2 MONTH))
+							AND DATE(PAY.MAX_CRT_TS) <= LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 3 MONTH))
+							THEN DET.ORD_Q * (60 / 100)
+                        WHEN
+                        	DATE(PAY.MAX_CRT_TS) > LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 3 MONTH))
+                        	AND DATE(PAY.MAX_CRT_TS) <= LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 4 MONTH))
+                        	THEN DET.ORD_Q * (40 / 100)
+                        WHEN
+                        	DATE(PAY.MAX_CRT_TS) > LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 4 MONTH))
+                        	AND DATE(PAY.MAX_CRT_TS) <= LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 5 MONTH))
+                        	THEN DET.ORD_Q * (20 / 100)
+                        WHEN
+                        	DATE(PAY.MAX_CRT_TS) > LAST_DAY(DATE_ADD(DATE(HED.ORD_DTE), INTERVAL 5 MONTH))
+                        	THEN DET.ORD_Q * (0 / 100)
+                    END) ORD_Q_DEP,
+					STK.INV_PRC,
+					DET.PRC,
+					DET.TOT_SUB,
+					(CASE WHEN STK.INV_PRC > 0 THEN STK.INV_PRC / DET.PRC ELSE NULL END) AS MARGIN,
+					'$PayConfigNbr' AS PAY_CONFIG_NBR 
+				FROM RTL.RTL_ORD_DET DET 
+				LEFT JOIN RTL.RTL_ORD_HEAD HED ON HED.ORD_NBR = DET.ORD_NBR
+				LEFT JOIN CMP.COMPANY COM ON HED.RCV_CO_NBR = COM.CO_NBR
+				LEFT JOIN (
+					SELECT 	INV_NBR,
+							CAT_NBR,
+							CAT_SUB_NBR
+						FROM RTL.INVENTORY 
+						WHERE 	(CAT_NBR IN (SELECT CAT_NBR FROM CDW.PAY_CMSN_CONFIG)
+								OR CAT_SUB_NBR IN (SELECT CAT_SUB_NBR FROM CDW.PAY_CMSN_CONFIG))
+								AND DEL_NBR = 0
+						ORDER BY INV_NBR ASC
+					) INV ON DET.INV_NBR = INV.INV_NBR
+				LEFT JOIN (
+					SELECT 	PYMT_NBR,
+							ORD_NBR,
+							MAX(CRT_TS) AS MAX_CRT_TS,
+							SUM(TND_AMT) AS TND_AMT
+						FROM RTL.RTL_ORD_PYMT
+						WHERE DEL_NBR = 0
+						GROUP BY ORD_NBR 
+					) PAY ON HED.ORD_NBR = PAY.ORD_NBR
+				LEFT JOIN (
+					SELECT 	PRSN_NBR,
+							POS_TYP
+						FROM CMP.PEOPLE 
+						WHERE 	DEL_NBR=0 
+								AND TERM_DTE IS NULL 
+								AND POS_TYP IN ('SNM','RAM','CMA','NAM')
+					)PPL ON PPL.PRSN_NBR = COM.ACCT_EXEC_NBR
+				LEFT JOIN (
+					SELECT
+					    DET.INV_NBR,
+					    DET.INV_PRC,
+					    DET.UPD_TS
+					FROM RTL.RTL_STK_DET DET
+					LEFT JOIN RTL.RTL_STK_HEAD HED
+					    ON DET.ORD_NBR = HED.ORD_NBR
+					WHERE HED.DEL_F = 0
+					    AND HED.IVC_TYP = 'RC'
+					ORDER BY DET.UPD_TS DESC
+				) STK ON STK.INV_NBR = DET.INV_NBR
+				WHERE 
+					HED.DEL_F = 0 
+					AND (INV.CAT_NBR IN (SELECT CAT_NBR FROM CDW.PAY_CMSN_CONFIG)
+						OR INV.CAT_SUB_NBR IN (SELECT CAT_SUB_NBR FROM CDW.PAY_CMSN_CONFIG))
+					AND PAY.TND_AMT >= HED.TOT_AMT 
+					AND PPL.POS_TYP IN ('SNM','RAM','CMA','NAM')
+					AND DATE(PAY.MAX_CRT_TS) >= '$PayBegDte'
+					AND DATE(PAY.MAX_CRT_TS) <= '$PayEndDte'  
+				GROUP BY DET.ORD_DET_NBR ASC";echo $query."<br/><br/>";
+	$result = mysql_query($query);
+
+	$query1  = "UPDATE CDW.PAY_CMSN_DET DET
+					LEFT JOIN ( 
+						SELECT 	ORD_DET_NBR,
+								(CASE 
+									  WHEN MARGIN > CMSN_STD_MIN  THEN CMSN_STD_MIN 
+									  ELSE MARGIN END) AS MARGIN_FLOOR
+						FROM CDW.PAY_CMSN_DET DET 
+						LEFT JOIN CDW.PAY_CMSN_CONFIG CON ON CON.CAT_NBR = DET.CAT_NBR OR CON.CAT_SUB_NBR = DET.CAT_SUB_NBR
+						WHERE PAY_CONFIG_NBR = $PayConfigNbr
+						) CMS ON CMS.ORD_DET_NBR = DET.ORD_DET_NBR
+				SET DET.MARGIN_FLOOR = CMS.MARGIN_FLOOR
+				WHERE DET.ORD_DET_NBR=CMS.ORD_DET_NBR";echo $query1."<br/><br/>";
+	$result1 = mysql_query($query1);
+
+	$query1  = "UPDATE CDW.PAY_CMSN_DET DET
+					LEFT JOIN ( 
+						SELECT 	ORD_DET_NBR,
+								(CASE  
+									  WHEN MARGIN_FLOOR < CMSN_STD_MAX THEN CMSN_STD_MAX 
+									  ELSE MARGIN_FLOOR END) AS MARGIN_CEILING
+						FROM CDW.PAY_CMSN_DET DET 
+						LEFT JOIN CDW.PAY_CMSN_CONFIG CON ON CON.CAT_NBR = DET.CAT_NBR OR CON.CAT_SUB_NBR = DET.CAT_SUB_NBR
+						WHERE PAY_CONFIG_NBR = $PayConfigNbr
+						) CMS ON CMS.ORD_DET_NBR = DET.ORD_DET_NBR
+				SET DET.MARGIN_CEILING = CMS.MARGIN_CEILING
+				WHERE DET.ORD_DET_NBR=CMS.ORD_DET_NBR";echo $query1."<br/><br/>";
+	$result1 = mysql_query($query1);
+
+	$query1  = "UPDATE CDW.PAY_CMSN_DET DET
+					LEFT JOIN ( 
+						SELECT 	ORD_DET_NBR,
+								(TOT_SUB*(CMSN_PCT_STD_MAX - (((MARGIN_CEILING - CMSN_STD_MAX)*100) * CMSN_PCT_STD_MIN))/100) AS CMSN
+						FROM CDW.PAY_CMSN_DET DET 
+						LEFT JOIN CDW.PAY_CMSN_CONFIG CON ON CON.CAT_NBR = DET.CAT_NBR OR CON.CAT_SUB_NBR = DET.CAT_SUB_NBR
+						WHERE PAY_CONFIG_NBR = $PayConfigNbr
+						) CMS ON CMS.ORD_DET_NBR = DET.ORD_DET_NBR
+				SET DET.CMSN = CMS.CMSN
+				WHERE DET.ORD_DET_NBR=CMS.ORD_DET_NBR";echo $query1."<br/><br/>";
+	$result1 = mysql_query($query1);
+?>

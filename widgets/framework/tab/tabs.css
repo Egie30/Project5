@@ -1,0 +1,67 @@
+.tabContaier{
+	margin-top:5px;
+	border:1px solid #ffffff;
+	position:relative;
+	width:100%;
+	/*height:100%;*/
+}
+	.tabContaier ul{
+		overflow:hidden;
+		height:30px;
+		position:absolute;
+		z-index:100;
+		margin:0;
+		padding:0;
+	}
+	.tabContaier li{
+		float:left;
+		list-style:none;
+		width:100px;
+		text-align:center;
+		margin-right:5px;
+	}
+	.tabContaier li a{
+		background:#fff;
+		border:1px solid #eeeeee;
+		color:#959fb0;
+		cursor:pointer;
+		display:block;
+		height:28px;
+		line-height:28px;
+		padding:0px;
+		-webkit-border-radius:3px;
+    	-moz-border-radius:3px;
+		border-radius:3px;
+
+	}
+	.tabContaier li a:hover{
+		background:#ffffff;
+		color:#6A6969;
+		border:1px solid #dddddd;
+		text-decoration:none;
+	}
+	.tabContaier li a.active{
+		background:#eeeeee;
+		border:1px solid #dddddd;
+		color:#6A6969;
+	}
+	.tabDetails{
+		background:#ffffff;
+		border:1px solid #fff;
+		margin:34px 0 0;
+		/*height:100%;*/
+	}
+	.tabContents{
+		display: none;
+		padding:0px;
+	}
+	.tabContents:first-child{
+		display: block;
+	}
+	.tabContents h1{
+		font:normal 24px/1.1em Georgia, "Times New Roman", Times, serif;
+		padding:0 0 10px;
+	}
+	.tabContents p{
+		padding:0 0 10px;
+	}

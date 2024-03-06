@@ -1,0 +1,1 @@
+php C:\xampp\htdocs\curl-prn-dig-transfer.php

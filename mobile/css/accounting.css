@@ -1,0 +1,13 @@
+@import url(font-san-francisco.css);
+
+.table-accounting{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-accounting th, td {
+    text-align: left;
+    padding: 5px;
+}
+
+.table-accounting tr:nth-child(even){background-color: #f2f2f2}

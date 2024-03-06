@@ -1,0 +1,13 @@
+commission-canvaser-report.php
+framework\functions\komisi.php
+payroll-edit-02262018.php
+payroll-edit-02272019.php
+payroll-edit-05252019.php
+payroll-edit-bkp.php
+payroll-edit-bkp2.php
+payroll-prn-dig-edit-print-05252019.php
+payroll-prn-dig-edit-print-bk.php
+payroll-prn-dig-edit-print-bkp.php
+payroll-prn-dig-edit-print-bkp2.php
+payroll-prn-dig-edit-print-week.php
+payroll-prn-dig-edit-print.php

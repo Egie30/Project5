@@ -1,0 +1,4 @@
+ajax\accounting\posting-payroll.php
+ajax\payroll.php
+payroll-archive-ls.php
+payroll-archive.php

@@ -1,0 +1,85 @@
+<?php
+include 'framework/database/connect.php';
+
+$query = "SELECT OUT_CMSN_PCT FROM NST.PARAM_LOC";
+$result = mysql_query($query);
+$rowPL  = mysql_fetch_array($result);
+
+$outsourcePcr = $rowPL['OUT_CMSN_PCT'];
+
+//Mengambil configurasi tanggal payroll bedasarkan tanggal kemarin
+$query = "SELECT  
+	PAY_CONFIG_NBR,
+	PAY_BEG_DTE,
+	PAY_END_DTE 
+FROM PAY.PAY_CONFIG_DTE 
+WHERE (CURRENT_DATE - INTERVAL 1 DAY) >= PAY_BEG_DTE AND (CURRENT_DATE - INTERVAL 1 DAY) <= PAY_END_DTE";
+$result = mysql_query($query);
+$row    = mysql_fetch_array($result);
+
+$PayConfigNbr = $row['PAY_CONFIG_NBR'];
+$PayBegDte    = $row['PAY_BEG_DTE'];
+$PayEndDte    = $row['PAY_END_DTE'];
+
+//Untuk menghapus data CDW yang memiliki PAY_CONFIG_NBR hari kemarin
+$query  = "DELETE FROM CDW.PAY_OUT_CMSN_DET WHERE PAY_CONFIG_NBR = ".$PayConfigNbr;
+//echo $query."<br/><br/>";
+//$result = mysql_query($query);
+
+$query = "INSERT INTO CDW.PAY_OUT_CMSN_DET
+SELECT
+	DET.ORD_DET_NBR,
+	DET.ORD_NBR,
+	DET.INV_NBR,
+	OUT_CMN_F,
+	DET.ORD_Q,
+	DET.TOT_SUB,
+	DIGDET.ORD_NBR,
+	DIGDET.ORD_DET_NBR,
+	DIGDET.BUY_CO_NBR,
+	DIGDET.NAME,
+	DIGDET.ACCT_EXEC_NBR,
+	DIGDET.DET_TTL,
+	DIGDET.ORD_Q,
+	DIGDET.TOT_SUB,
+	((DIGDET.TOT_SUB - DET.TOT_SUB) * ".$outsourcePcr.")/100 AS TOT_CMSN,
+	'$PayConfigNbr' AS PAY_CONFIG_NBR 
+FROM RTL.RTL_STK_DET DET
+	INNER JOIN RTL.RTL_STK_HEAD HED ON DET.ORD_NBR = HED.ORD_NBR
+	INNER JOIN (
+		SELECT 
+			DET.ORD_NBR,
+			DET.ORD_DET_NBR,
+			HED.BUY_CO_NBR,
+			COM.NAME,
+			COM.ACCT_EXEC_NBR,
+			DET_TTL,
+			ORD_Q,
+			CASE WHEN PAR.ORD_DET_NBR_PAR != '' THEN PAR.TOT_SUB ELSE DET.TOT_SUB END AS TOT_SUB
+		FROM CMP.PRN_DIG_ORD_DET DET 
+			INNER JOIN CMP.PRN_DIG_ORD_HEAD HED ON DET.ORD_NBR = HED.ORD_NBR
+			INNER JOIN CMP.PRN_DIG_TYP TYP ON DET.PRN_DIG_TYP=TYP.PRN_DIG_TYP 
+			LEFT JOIN CMP.COMPANY COM ON HED.BUY_CO_NBR = COM.CO_NBR
+			LEFT JOIN CMP.PEOPLE PPL ON COM.ACCT_EXEC_NBR = PPL.PRSN_NBR
+			LEFT OUTER JOIN(
+				SELECT 
+					ORD_DET_NBR_PAR,
+					SUM(TOT_SUB) AS TOT_SUB
+				FROM CMP.PRN_DIG_ORD_DET DET 
+					LEFT OUTER JOIN CMP.PRN_DIG_TYP TYP ON DET.PRN_DIG_TYP=TYP.PRN_DIG_TYP
+				WHERE DET.DEL_NBR=0 
+				GROUP BY ORD_DET_NBR_PAR
+			)PAR ON DET.ORD_DET_NBR = PAR.ORD_DET_NBR_PAR
+		WHERE DET.DEL_NBR=0 AND DET.ORD_NBR!=0
+	)DIGDET ON DET.ORD_DET_NBR_REF = DIGDET.ORD_DET_NBR
+WHERE 
+	HED.DEL_F = 0 
+	AND HED.DEL_F = 0 
+	AND DET.OUT_CMN_F = 1 
+	AND HED.IVC_TYP = 'RC' 
+	AND DATE(HED.ORD_DTE) >= '$PayBegDte' 
+	AND DATE(HED.ORD_DTE) <= '$PayEndDte'  
+GROUP BY DET.ORD_DET_NBR";
+echo "<pre>".$query."<br/><br/>";
+//$result = mysql_query($query);
+?>

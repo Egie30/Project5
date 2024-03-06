@@ -1,0 +1,1 @@
+robocopy "\\CAMPUS12\TNSRip-X\Job" "C:\xampp\htdocs\Log\MVJ1624" /S /V /NP /R:10 /W:30

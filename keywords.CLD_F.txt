@@ -1,0 +1,10 @@
+cloud-autosync.php
+cloud-dailysync.php
+framework\database\connect-cloud-local.php
+framework\database\function_db.php
+mobile\framework\database\connect-cloud-local.php
+mobile\framework\database\function_db.php
+mobile\test\framework\database\connect-cloud-local.php
+mobile\test\framework\database\function_db.php
+mobile\test5\framework\database\connect-cloud-local.php
+mobile\test5\framework\database\function_db.php

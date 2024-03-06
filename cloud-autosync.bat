@@ -1,0 +1,1 @@
+php C:\xampp\htdocs\cloud-autosync.php

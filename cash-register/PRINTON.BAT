@@ -1,0 +1,7 @@
+TIMEOUT 60
+NET USE LPT2: \\OKLAHOMA\SP712 /PERSISTENT:YES
+CD c:\
+CD xampp
+CD htdocs
+CD cash-register
+PRINTON.EXE

@@ -1,0 +1,74 @@
+<?php
+include 'framework/database/connect.php';
+
+$query = "SELECT OUT_CMSN_PCT FROM NST.PARAM_LOC";
+$result = mysql_query($query);
+$rowPL  = mysql_fetch_array($result);
+
+$outsourcePcr = $rowPL['OUT_CMSN_PCT'];
+
+//Mengambil configurasi tanggal payroll bedasarkan tanggal kemarin
+$query = "SELECT  
+	PAY_CONFIG_NBR,
+	PAY_BEG_DTE,
+	PAY_END_DTE 
+FROM PAY.PAY_CONFIG_DTE 
+WHERE (CURRENT_DATE - INTERVAL 1 DAY) >= PAY_BEG_DTE AND (CURRENT_DATE - INTERVAL 1 DAY) <= PAY_END_DTE";
+$result = mysql_query($query);
+$row    = mysql_fetch_array($result);
+
+$PayConfigNbr = $row['PAY_CONFIG_NBR'];
+$PayBegDte    = $row['PAY_BEG_DTE'];
+$PayEndDte    = $row['PAY_END_DTE'];
+
+//Untuk menghapus data CDW yang memiliki PAY_CONFIG_NBR hari kemarin
+$query  = "DELETE FROM CDW.PAY_OUT_CMSN_DET WHERE PAY_CONFIG_NBR = ".$PayConfigNbr;
+//echo $query."<br/><br/>";
+//$result = mysql_query($query);
+
+$query = "INSERT INTO CDW.PAY_OUT_CMSN_DET
+SELECT
+	DET.ORD_DET_NBR,
+	DET.ORD_NBR,
+	DET.INV_NBR,
+	RCV.OUT_CMN_F,
+	DET.ORD_Q,
+	DET.INV_PRC,
+	DET.TOT_SUB,
+	PRN_DET.ORD_NBR,
+	PRN_DET.ORD_DET_NBR,
+	PRN_HED.BUY_CO_NBR,
+	PRN_COM.NAME,
+	PRN_DET.DET_TTL,
+	PRN_DET.ORD_Q,
+	PRN_DET.PRN_DIG_PRC,
+	CASE WHEN PRN_DET.PRN_DIG_PRC = 0 THEN PRN_DET.TOT_SUB / PRN_DET.ORD_Q ELSE PRN_DET.PRN_DIG_PRC END AS PRC,
+	(((PRN_DET.TOT_SUB / PRN_DET.ORD_Q) - DET.INV_PRC) * 5)/100 AS TOT_CMSN
+FROM RTL.RTL_STK_DET DET
+	INNER JOIN RTL.RTL_STK_HEAD HED ON DET.ORD_NBR = HED.ORD_NBR
+	LEFT OUTER JOIN CMP.COMPANY RCV ON HED.SHP_CO_NBR = RCV.CO_NBR
+	INNER JOIN CMP.PRN_DIG_ORD_DET PRN_DET ON DET.ORD_DET_NBR_REF = PRN_DET.ORD_DET_NBR
+	INNER JOIN CMP.PRN_DIG_ORD_HEAD PRN_HED ON PRN_DET.ORD_NBR = PRN_HED.ORD_NBR
+	LEFT JOIN CMP.COMPANY PRN_COM ON PRN_HED.BUY_CO_NBR = PRN_COM.CO_NBR
+	LEFT JOIN(
+		SELECT
+			PYMT.PYMT_NBR,
+			PYMT.ORD_NBR,
+			SUM(PYMT.TND_AMT) AS TND_AMT,
+			PYMT.CRT_TS,
+			MAX(PYMT.CRT_TS) AS MAX_CRT_TS
+		FROM CMP.PRN_DIG_ORD_PYMT PYMT
+		WHERE PYMT.DEL_NBR = 0 AND VAL_NBR IS NOT NULL
+		GROUP BY PYMT.ORD_NBR
+	) PAY ON PAY.ORD_NBR = PRN_DET.ORD_NBR
+WHERE 
+	HED.DEL_F = 0 
+	AND HED.DEL_F = 0 
+	AND RCV.OUT_CMN_F = 1 
+	AND HED.IVC_TYP = 'RC'  
+	AND DATE(PAY.MAX_CRT_TS) >= '$PayBegDte' 
+	AND DATE(PAY.MAX_CRT_TS) <= '$PayEndDte'
+GROUP BY DET.ORD_DET_NBR";
+echo "<pre>".$query."<br/><br/>";
+//$result = mysql_query($query);
+?>

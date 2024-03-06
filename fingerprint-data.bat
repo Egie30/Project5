@@ -1,0 +1,1 @@
+php C:\xampp\htdocs\fingerprint-data.php

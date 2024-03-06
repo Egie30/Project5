@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Header and Footer example</title>
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/latest/normalize.css">
+<style type="text/css">
+@page {
+	margin: 0 1cm;
+}
+
+body {
+	font-family: "Times New Roman", Georgia, Serif;
+	margin-top: 2cm;
+	margin-bottom: 13cm;
+	text-align: left;
+	color: rgb(92,51,23);
+}
+
+#header {
+	font-family: "Times New Roman", Georgia, Serif;
+	border-bottom: 2px solid;
+}
+
+#header h1 {
+	margin-bottom: 10px;
+}
+
+#body {
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", "monospace";
+	margin: 15px 5px;
+}
+
+#header, #footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+}
+
+#header table,
+#footer table {
+	width: 100%;
+	border-collapse: collapse;
+	border: none;
+}
+
+#header {
+	top: 0;
+}
+
+#footer {
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", "monospace";
+	bottom: 0;
+	height: 4cm;
+}
+
+.border-gold {
+	border-color: rgb(92,51,23);
+}
+
+.text-center {
+	text-align:center;
+}
+
+.text-left {
+	text-align:left;
+}
+
+.text-right {
+	text-align:right;
+}
+</style>
+</head>
+<body>
+<div id="header" class="border-gold">
+	<h1 class="text-center">INVOICE</h1>
+</div>
+
+<div id="footer">
+	<table width="100%">
+		<tbody>
+			<tr>
+				<td class="text-left" style="vertical-align:top" width="70%">
+						<p style="margin-top:0;">Term &amp; Conditions</p>
+						<ol>
+							<li>The product(s) has been checked by the customerand deemed in GOOD condition</li>
+							<li>The product(s) is non-exhangeable and refundable</li>
+							<li>All terms &amp; conditions stated  here in are subjected to change without prior notice</li>
+						</ol>
+				</td>
+				<td class="text-center" style="vertical-align:top" width="30%">
+					Customer Signature,
+					<div style="height:70px"></div>
+					<div class="text-center">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<section id="body">
+	<table width="100%" style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-left">DATE: {01-01-2015}</td>
+				<td class="text-right">Invoice # : {1234567890}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="95%" style="margin:0 auto 15px auto;">
+		<thead>
+			<tr>
+				<th class="text-left" width="40%">Particulars</th>
+				<th class="text-left" width="20%">CODE</th>
+				<th class="text-left" width="20%">QUANTITY</th>
+				<th class="text-right" width="20%">PRICE</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left">{Particulars}</td>
+				<td class="text-left">{Code}</td>
+				<td class="text-left">{Quantity}</td>
+				<td class="text-right">{Price}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%" style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-right" width="80%">TOTAL</td>
+				<td class="text-right" width="20%">{1234567890}</td>
+			</tr>
+			<tr>
+				<td class="text-right" width="80%">PAYMENT TOTAL</td>
+				<td class="text-right" width="20%">{1234567890}</td>
+			</tr>
+			<tr>
+				<td class="text-right" width="80%">CURRENT PAYMENT</td>
+				<td class="text-right" width="20%">{1234567890}</td>
+			</tr>
+			<tr>
+				<td class="text-right" width="80%">REMAINING PAYMENT</td>
+				<td class="text-right" width="20%">{1234567890}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+</body>
+</html>

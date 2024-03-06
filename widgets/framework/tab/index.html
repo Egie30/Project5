@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Tab</title>
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="tabs.css">
+</head>
+
+<body>
+<div class="tabContaier">
+	<ul>
+    	<li><a class="active" href="#tab1">Div One</a></li>
+    	<li><a href="#tab2">Div Two</a></li>
+    	<li><a href="#tab3">Div Three</a></li>
+    </ul><!-- //Tab buttons -->
+    <div class="tabDetails">
+    	<div id="tab1" class="tabContents">
+        	<h1>Div One</h1>
+            <p>Sed gravida velit ut lorem dictum vitae venenatis dolor faucibus. In vehicula malesuada mi, vel semper sem porta in. Mauris suscipit lorem eget justo congue semper.</p>
+            <p>Donec et purus eget elit tristique consequat. Integer ut orci eu augue tristique viverra nec vitae odio. Nulla sem nibh, posuere quis condimentum vitae, posuere sit amet lectus. Morbi euismod tincidunt mauris ut scelerisque.</p>
+        </div><!-- //tab1 -->
+    	<div id="tab2" class="tabContents">
+        	<h1>Div Two</h1>
+            <p>Sed gravida velit ut lorem dictum vitae venenatis dolor faucibus. In vehicula malesuada mi, vel semper sem porta in. Mauris suscipit lorem eget justo congue semper.</p>
+            <p>Donec et purus eget elit tristique consequat. Integer ut orci eu augue tristique viverra nec vitae odio. Nulla sem nibh, posuere quis condimentum vitae, posuere sit amet lectus. Morbi euismod tincidunt mauris ut scelerisque.</p>
+        </div><!-- //tab2 -->
+    	<div id="tab3" class="tabContents">
+        	<h1>Div Three</h1>
+            <p>Sed gravida velit ut lorem dictum vitae venenatis dolor faucibus. In vehicula malesuada mi, vel semper sem porta in. Mauris suscipit lorem eget justo congue semper.</p>
+            <p>Donec et purus eget elit tristique consequat. Integer ut orci eu augue tristique viverra nec vitae odio. Nulla sem nibh, posuere quis condimentum vitae, posuere sit amet lectus. Morbi euismod tincidunt mauris ut scelerisque.</p>
+        </div><!-- //tab3 -->
+    </div><!-- //tab Details -->
+
+</div><!-- //Tab Container -->
+<script type="text/javascript" src="jquery-latest.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabContents").hide(); // Hide all tab content divs by default
+		$(".tabContents:first").show(); // Show the first div of tab content by default
+		
+		$(".tabContaier ul li a").click(function(){ //Fire the click event
+			
+			var activeTab = $(this).attr("href"); // Catch the click link
+			$(".tabContaier ul li a").removeClass("active"); // Remove pre-highlighted link
+			$(this).addClass("active"); // set clicked link to highlight state
+			$(".tabContents").hide(); // hide currently visible tab content div
+			$(activeTab).fadeIn(); // show the target tab content div by matching clicked link.
+			
+			return false; //prevent page scrolling on tab click
+		});
+	});
+</script>	
+</body>
+</html>

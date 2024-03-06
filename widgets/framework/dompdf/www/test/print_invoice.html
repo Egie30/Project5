@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Header and Footer example</title>
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/latest/normalize.css">
+<style type="text/css">
+@page {
+	margin: 0 1cm;
+}
+
+body {
+	font-family: "Times New Roman", Georgia, Serif;
+	margin-top: 2cm;
+	margin-bottom: 13cm;
+	text-align: left;
+	color: rgb(92,51,23);
+}
+
+#header {
+	font-family: "Times New Roman", Georgia, Serif;
+	border-bottom: 2px solid;
+}
+
+#header h1 {
+	margin-bottom: 10px;
+}
+
+#body {
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", "monospace";
+	margin: 15px 5px;
+}
+
+#header, #footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+}
+
+#header table,
+#footer table {
+	width: 100%;
+	border-collapse: collapse;
+	border: none;
+}
+
+#header {
+	top: 0;
+}
+
+#footer {
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", "monospace";
+	bottom: 0;
+	height: 13cm;
+}
+
+.border-gold {
+	border-color: rgb(92,51,23);
+}
+
+.text-center {
+	text-align:center;
+}
+
+.text-left {
+	text-align:left;
+}
+
+.text-right {
+	text-align:right;
+}
+</style>
+</head>
+<body>
+<div id="header" class="border-gold">
+	<h1 class="text-center">INVOICE</h1>
+</div>
+
+<div id="footer">
+	<div style="margin-bottom: 15px;">
+		<p>Sales Agreement : terms & conditions</p>
+		<ol>
+			<li>Jewellery specification as shown in the jewellery certificate # C 0000013 has been checked by the customer and in GOOD condition.</li>
+			<li>Free jewellery cleaning (LIFETIME).</li>
+			<li>Exchange policy: Price minus 10% (fine diamond), Price minus 15% (fancy colour diamond & other precious stones).</li>
+			<li>Buyback policy: Price minus 20% (fine diamond), Price minus 25% (fancy colour diamond & other precious stones).</li>
+			<li>This document is produced along with the jewellery certificate # C 0000013 These two (2) documents are deemed as one (1) unity and exchange or buyback is serviceable only if the buyer can present these two documents along with the jewellery in GOOD condition. Broken or cracked diamonds and other precious stones are not qualified for exchange & buyback.</li>
+			<li>All jewellery is qualified for exchange & buyback except for wedding ring.</li>
+			<li>Jewellery customization fee is not part of the jewellerys price and therefore is not part of sales exchange and/or buyback agreement.</li>
+			<li>All terms & conditions stated in here are subjected to change without prior notice.</li>
+		</ol>
+	</div>
+	<table width="100%">
+		<tbody>
+			<tr>
+				<td class="text-left" width="60%"></td>
+				<td class="text-center" width="40%">Signature,</td>
+			</tr>
+			<tr>
+				<td width="60%"></td>
+				<td width="40%">
+					<div style="height:50px"></div>
+					<div class="text-center">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<section id="body">
+	<table width="100%" style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-left" width="60%">Invoice # : {1234567890}</td>
+				<td class="text-left" width="40%">Date: {01-01-2015}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%" style="margin-bottom: 15px;">
+		<thead>
+			<tr>
+				<th class="text-left">Product Code</th>
+				<th class="text-left">Particulars</th>
+				<th class="text-left">Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{Product Code}</td>
+				<td>{Particulars}</td>
+				<td>{Price}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%" style="margin-bottom: 15px;">
+		<thead>
+			<tr>
+				<th class="text-left" width="60%"></th>
+				<th class="text-left" width="40%">Grand Total {1234567890}</th>
+			</tr>
+		</thead>
+	</table>
+	<table style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-left" style="white-space: nowrap;vertical-align:top">In Words: </td>
+				<td class="text-left">{Grand Total}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%">
+		<tbody>
+			<tr>
+				<td class="text-left">Payment: </td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%" style="margin-bottom: 15px;">
+		<thead>
+			<tr>
+				<th class="text-left">Payment Type</th>
+				<th class="text-left">Number</th>
+				<th class="text-left">Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{Cash/Visa/Master Card}</td>
+				<td>{1234567890}</td>
+				<td>{1234567890}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-left" style="white-space: nowrap;vertical-align:top"><b>Associate Code: </b></td>
+				<td class="text-left"><b>{admin}</b></td>
+			</tr>
+		</tbody>
+	</table>
+	<table style="margin-bottom: 15px;">
+		<tbody>
+			<tr>
+				<td class="text-left" style="white-space: nowrap;vertical-align:top;padding-right:10px;"><b>Customer Name : </b></td>
+				<td class="text-left"><b>{Ade Maya Brahmantia}</b></td>
+			</tr>
+			<tr>
+				<td class="text-left" style="white-space: nowrap;vertical-align:top;padding-right:10px;"><b>Address/Phone : </b></td>
+				<td class="text-left"><b>{Jl. Namburan Lor 4/0812.1585.121/ 0819.0190.7494}</b></td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+</body>
+</html>

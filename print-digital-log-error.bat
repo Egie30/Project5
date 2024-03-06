@@ -1,0 +1,1 @@
+php C:\xampp\htdocs\print-digital-log-error.php

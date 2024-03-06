@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<param>
+	<tax>
+		<ppn>
+			0.11
+		</ppn>
+	</tax>
+	<config>
+		<cloud>
+			1
+		</cloud>
+		<print>
+			EPSON
+		</print>
+	</config>
+	<print-digital>
+		<period-order-active-month>
+			3
+		</period-order-active-month>
+		<period-bad-order-month>
+			12
+		</period-bad-order-month>
+		<datawarehouse-dashboard-refresh-buffer-month>
+			2
+		</datawarehouse-dashboard-refresh-buffer-month>
+	</print-digital>
+	<business-unit>
+		<name>
+			Champion
+		</name>
+		<company-number>
+			1
+		</company-number>
+	</business-unit>
+	<business-unit>
+		<name>
+			Champion Printing
+		</name>
+		<company-number>
+			271
+		</company-number>
+	</business-unit>
+	<business-unit>
+		<name>
+			Champion Campus
+		</name>
+		<company-number>
+			1002
+		</company-number>
+	</business-unit>
+	<business-unit>
+		<name>
+			ProReliance.com
+		</name>
+		<company-number>
+			997
+		</company-number>
+	</business-unit>
+	<business-unit>
+		<name>
+			The Jayan
+		</name>
+		<company-number>
+			889
+		</company-number>
+	</business-unit>
+	<business-unit>
+		<name>
+			The Common Grounds
+			</name>
+		<company-number>
+			1099
+		</company-number>
+	</business-unit>
+</param>

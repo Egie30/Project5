@@ -1,0 +1,8 @@
+TIMEOUT 30
+NET USE LPT1 /delete
+NET USE LPT1: \\192.168.1.70\LX-300 /PERSISTENT:YES
+CD c:\
+CD xampp
+CD htdocs
+CD print-digital
+PRINTON.EXE 5 LPT1

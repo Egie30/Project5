@@ -1,0 +1,37 @@
+/*
+ * Base structure
+ */
+html,
+body 
+{
+  background-color: #fff;
+  font-family: 'San Francisco Display', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight:300;
+  font-size:10pt;
+  width: auto;
+}
+
+body 
+{
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  //text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  //box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+
+#layout:hover
+{
+    background-color: #eeeeee;
+}
+
+
+span.badge{
+    height:15px;
+    text-align:center;
+    border-radius:14px 14px 14px 14px;
+    background-color:#d92115;
+    color:#ffffff;
+    padding:1px 7px 3px 7px;
+}
